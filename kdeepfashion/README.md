@@ -1,1 +1,1 @@
-# Nondisclosure
+# Partial disclosure
