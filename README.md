@@ -3,6 +3,20 @@
 ### Original git
 - https://github.com/ahmedrashed-ml/GraphRec
 
+<table>
+    <thead>
+        <tr>
+            <td>GraphRec Model Architecture</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/model.PNG"/></td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 ### Build Docker Image & 
 ```
