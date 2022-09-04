@@ -91,12 +91,23 @@ python3 GraphRec-kfashion_Inference.py --RUN test
     <thead>
         <tr>
             <td>HR@10 Score</td>
-            <td>RMSE Score</td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/refer_carca.png"/></td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <td>RMSE Score</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
             <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/paper_result.png"/></td>
         </tr>
     </tbody>
