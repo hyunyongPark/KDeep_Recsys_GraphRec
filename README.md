@@ -57,24 +57,11 @@ pip install -r requirements.txt
 해당 weight 파일은 "./model_kfashion_add_externel" 에 위치하도록 합니다.  
 - https://drive.google.com/drive/folders/1tm6HLIx_r9jNquIUPyGtHk1TQR2XOWIw?usp=sharing
 
-<table>
-    <thead>
-        <tr>
-            <td>Example</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><img src="https://github.com/hyunyongPark/removal_code/blob/main/img/img1.PNG"/></td>
-        </tr>
-    </tbody>
-</table>
-
 
 The testing cmd is: 
 ```
 
-python3 rembg/src/rembg/cmd/cli.py --input_path "원본 이미지가 저장된 로컬 경로" --output_path "배경제거 처리 된 이미지가 저장될 경로"
+python3 GraphRec-kfashion_Inference.py --RUN test
 
 ```
 
