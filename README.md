@@ -1,6 +1,6 @@
 # kdeepfashion_RecSys
 
-### Original git
+### Original git Repo
 - https://github.com/ahmedrashed-ml/GraphRec
 
 <table>
