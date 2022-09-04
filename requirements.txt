@@ -1,0 +1,13 @@
+# python V  # 3.8.13
+# pip install -r requirements.txt
+
+# base ----------------------------------------
+numpy==1.20.1
+pandas==1.2.3
+tqdm>=4.63.0
+tensorflow-cpu==2.7.0
+scikit-learn==1.0.2
+
+# plotting ------------------------------------
+matplotlib>=3.5.1
+
