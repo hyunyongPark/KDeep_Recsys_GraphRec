@@ -5,27 +5,37 @@
 
 
 ### Build Docker Image
-'''
+```
 # 도커이미지 빌드
 sudo docker build -t graphrec:v1 .
-
 # 생성된 도커이미지 확인
 sudo docker images
-'''
+```
 
-'''
+```
 # 생성된 도커이미지 실행
 sudo docker run graphrec:v1
-'''
+```
 - Result
-
+<table>
+    <thead>
+        <tr>
+            <td>Example</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/result.PNG"/></td>
+        </tr>
+    </tbody>
+</table>
 
 
 ### Requirements
-'''
+```
 # python version : 3.8.13
 pip install -r requirements.txt 
-'''
+```
 
 
 
