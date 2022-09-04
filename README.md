@@ -104,10 +104,6 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 |Graph + User + Item|train(22639)/test(2516)|**0.7813**|
 
 <table>
-    <thead>
-        <tr>
-            <td>result</td>
-        </tr>
     </thead>
     <tbody>
         <tr>
