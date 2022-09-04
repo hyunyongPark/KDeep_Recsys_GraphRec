@@ -55,8 +55,7 @@ pip install -r requirements.txt
 아래의 링크를 통해 학습 weight 파일을 다운받습니다. 
 해당 파일은 kdeepfashion 데이터셋을 학습한 trained file입니다.
 해당 weight 파일은 "./model_kfashion_add_externel" 에 위치하도록 합니다.  
-- https://drive.google.com/drive/folders/1tm6HLIx_r9jNquIUPyGtHk1TQR2XOWIw?usp=sharing
-
+- https://drive.google.com/drive/folders/1tTCoCYQBNi-4dfTqwfa8LU6UJeTE41-r?usp=sharing
 
 The testing cmd is: 
 ```
@@ -87,7 +86,21 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 |Graph + User + Item|train(9373)/test(1042)|*0.8357*|
 |Graph + User + Item|train(22639)/test(2516)|**0.7813**|
 
-
+- Reference Result Tables in Paper
+<table>
+    <thead>
+        <tr>
+            <td>HR@10 Score</td>
+            <td>RMSE Score</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/refer_carca.png"/></td>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/paper_result.png"/></td>
+        </tr>
+    </tbody>
+</table>
 
 ### References
 
