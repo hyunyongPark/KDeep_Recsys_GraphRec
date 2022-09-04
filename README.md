@@ -83,9 +83,9 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 
 |Embedding|Dataset|RMSE-Score|
 |---|---|---|
-|'Graph'|train(9373)/test(1042)|*0.9711*|
-|'Graph + User + Item'|train(9373)/test(1042)|*0.8357*|
-|'Graph + User + Item'|train(22639)/test(2516)|**<span style="color:red">0.7813</span>**|
+|Graph|train(9373)/test(1042)|*0.9711*|
+|Graph + User + Item|train(9373)/test(1042)|*0.8357*|
+|Graph + User + Item|train(22639)/test(2516)|<font color='#1E90FF'> 0.7813 </font>|
 
 
 ### References
