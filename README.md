@@ -103,6 +103,20 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 |Graph + User + Item|train(9373)/test(1042)|*0.8357*|
 |Graph + User + Item|train(22639)/test(2516)|**0.7813**|
 
+<table>
+    <thead>
+        <tr>
+            <td>result</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/result.PNG"/></td>
+        </tr>
+    </tbody>
+</table>
+
+
 - Reference Result Tables in Paper
 <table>
     <thead>
