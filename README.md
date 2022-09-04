@@ -80,6 +80,8 @@ python3 GraphRec-kfashion_Inference.py --RUN test
     </tbody>
 </table>
 
+
+- Our Model Performance Table
 |Embedding|Dataset|RMSE-Score|
 |---|---|---|
 |Graph|train(9373)/test(1042)|*0.9711*|
