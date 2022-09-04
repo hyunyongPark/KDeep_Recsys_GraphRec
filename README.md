@@ -85,7 +85,8 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 |---|---|---|
 |Graph|train(9373)/test(1042)|*0.9711*|
 |Graph + User + Item|train(9373)/test(1042)|*0.8357*|
-|Graph + User + Item|train(22639)/test(2516)|<font color='#1E90FF'> 0.7813 </font>|
+|Graph + User + Item|train(22639)/test(2516)|**0.7813**|
+
 
 
 ### References
