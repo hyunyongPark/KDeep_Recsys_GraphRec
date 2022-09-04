@@ -4,7 +4,7 @@
 - https://github.com/ahmedrashed-ml/GraphRec
 
 
-### Build Docker Image
+### Build Docker Image & 
 ```
 # 도커이미지 빌드
 sudo docker build -t graphrec:v1 .
@@ -81,7 +81,11 @@ python3 GraphRec-kfashion_Inference.py --RUN test
     </tbody>
 </table>
 
-
+|Embedding|Dataset|RMSE-Score|
+|---|---|---|
+|Graph|train(9373)/test(1042)|*0.9711*|
+|Graph + User + Item|train(9373)/test(1042)|*0.8357*|
+|Graph + User + Item|train(22639)/test(2516)|<span style="color:red">0.7813</span>|
 
 
 ### References
