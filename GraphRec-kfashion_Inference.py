@@ -6,6 +6,7 @@ We would like to thank "Guocong Song" because we utilized parts of his code from
 
 
 import os
+import sys
 import numpy as np
 import pandas as pd
 import time
@@ -14,13 +15,17 @@ import argparse
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from six import next
+
 from sklearn import preprocessing
-import sys
+from sklearn import preprocessing
 from scipy.sparse import lil_matrix
 from scipy.sparse import coo_matrix
+
+from utils.iterator import *
+from utils.load_dataset import *
+
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-
 import warnings 
 warnings.filterwarnings(action='ignore')
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
@@ -28,43 +33,6 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ['CUDA_VISIBLE_DEVICES']=''
 tf.Session(config=tf.ConfigProto(device_count={"GPU": 0, "CPU": 1}))
-
-def get_UserData():
-    col_names = ["user", "r_gender", "age", "mar", "child", "edu", "job", "income", "fa_expend"]
-    dummies_col = [ "age", "r_gender", "mar", "job", "child", "income", "fa_expend"]
-    
-    df = pd.read_csv("./kdeepfashion/user_data.csv", index_col=0)
-    df = df[col_names]
-    df=pd.get_dummies(df,columns=dummies_col)
-    del df["user"]
-    return df.values
-
-def get_ItemData():
-    col_names = ['item', 'era', 'style', 'gender']
-    dummies_col = ["gender", "style", "era"]
-    
-    df = pd.read_csv('./kdeepfashion/item_data.csv', index_col=0)
-    df = df[col_names]
-    df=pd.get_dummies(df,columns=dummies_col)
-    del df["item"]
-    return df.values 
-  
-def read_process(filname, sep="\t"):
-    df = pd.read_csv(filname, index_col=0)
-    for col in ("user", "item"):
-        df[col] = df[col].astype(np.int32)
-    df["rate"] = df["rate"].astype(np.float32)
-    return df
-
-def get_data(opt):
-    global PERC
-    df = read_process(f"{opt.TEST_PATH}")
-    rows = len(df)
-    df = df.iloc[np.random.RandomState(seed=329).permutation(rows)].reset_index(drop=True)
-    split_index = int(rows * opt.PERC)
-    df_train = df[0:split_index]
-    df_test = df[split_index:].reset_index(drop=True)
-    return df_train, df_test
 
 def get_data_HR(opt):
     global PERC
