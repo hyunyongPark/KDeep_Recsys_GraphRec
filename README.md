@@ -1,7 +1,21 @@
 # kdeepfashion_RecSys
 
-### Original git
+### Original git Repo
 - https://github.com/ahmedrashed-ml/GraphRec
+
+<table>
+    <thead>
+        <tr>
+            <td>GraphRec Model Architecture</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/model.PNG"/></td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 ### Build Docker Image & 
@@ -88,6 +102,19 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 |Graph|train(9373)/test(1042)|*0.9711*|
 |Graph + User + Item|train(9373)/test(1042)|*0.8357*|
 |Graph + User + Item|train(22639)/test(2516)|**0.7813**|
+
+<table>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="https://github.com/hyunyongPark/kdeepfashion_RecSys/blob/main/img/result.PNG"/></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
 
 - Reference Result Tables in Paper
 <table>
