@@ -6,6 +6,7 @@ We would like to thank "Guocong Song" because we utilized parts of his code from
 
 
 import os
+import sys
 import numpy as np
 import pandas as pd
 import time
@@ -14,10 +15,15 @@ import argparse
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from six import next
+
 from sklearn import preprocessing
-import sys
+from sklearn import preprocessing
 from scipy.sparse import lil_matrix
 from scipy.sparse import coo_matrix
+
+from utils.iterator import *
+from utils.load_dataset import *
+
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 import warnings 
@@ -25,98 +31,6 @@ warnings.filterwarnings(action='ignore')
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 tf.logging.set_verbosity(tf.logging.ERROR)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-def get_UserData():
-    col_names = ["user", "r_gender", "age", "mar", "child", "edu", "job", "income", "fa_expend"]
-    dummies_col = [ "age", "r_gender", "mar", "job", "child", "income", "fa_expend"]
-    
-    df = pd.read_csv("./kdeepfashion/user_data.csv", index_col=0)
-    df = df[col_names]
-    df=pd.get_dummies(df,columns=dummies_col)
-    del df["user"]
-    return df.values
-
-def get_ItemData():
-    col_names = ['item', 'era', 'style', 'gender']
-    dummies_col = ["gender", "style", "era"]
-    
-    df = pd.read_csv('./kdeepfashion/item_data.csv', index_col=0)
-    df = df[col_names]
-    df=pd.get_dummies(df,columns=dummies_col)
-    del df["item"]
-    return df.values 
-  
-def read_process(filname, sep="\t"):
-    df = pd.read_csv(filname, index_col=0)
-    for col in ("user", "item"):
-        df[col] = df[col].astype(np.int32)
-    df["rate"] = df["rate"].astype(np.float32)
-    return df
-
-def get_data(opt):
-    global PERC
-    df = read_process("./kdeepfashion/rate_data.csv")
-    rows = len(df)
-    df = df.iloc[np.random.RandomState(seed=329).permutation(rows)].reset_index(drop=True)
-    split_index = int(rows * opt.PERC)
-    df_train = df[0:split_index]
-    df_test = df[split_index:].reset_index(drop=True)
-    return df_train, df_test
-
-def get_data_HR(opt):
-#     global PERC
-#     df_train = read_process(f"./kdeepfashion/HR_train.csv")
-#     df_test = read_process(f"./kdeepfashion/HR_test.csv")
-#     return df_train, df_test
-    df = read_process(f"./kdeepfashion/HR_train.csv")
-    rows = len(df)
-    df = df.iloc[np.random.RandomState(seed=329).permutation(rows)].reset_index(drop=True)
-    split_index = int(rows * opt.PERC)
-    df_train = df[0:split_index]
-    df_test = df[split_index:].reset_index(drop=True)
-    return df_train, df_test
-
-
-class ShuffleIterator(object):
-
-    def __init__(self, inputs, batch_size=10):
-        self.inputs = inputs
-        self.batch_size = batch_size
-        self.num_cols = len(self.inputs)
-        self.len = len(self.inputs[0])
-        self.inputs = np.transpose(np.vstack([np.array(self.inputs[i]) for i in range(self.num_cols)]))
-
-    def __len__(self):
-        return self.len
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        return self.next()
-
-    def next(self):
-        ids = np.random.randint(0, self.len, (self.batch_size,))
-        out = self.inputs[ids, :]
-        return [out[:, i] for i in range(self.num_cols)]
-
-
-class OneEpochIterator(ShuffleIterator):
-    def __init__(self, inputs, batch_size=10):
-        super(OneEpochIterator, self).__init__(inputs, batch_size=batch_size)
-        if batch_size > 0:
-            self.idx_group = np.array_split(np.arange(self.len), np.ceil(self.len / batch_size))
-        else:
-            self.idx_group = [np.arange(self.len)]
-        self.group_id = 0
-
-    def next(self):
-        if self.group_id >= len(self.idx_group):
-            self.group_id = 0
-            raise StopIteration
-        out = self.inputs[self.idx_group[self.group_id], :]
-        self.group_id += 1
-        return [out[:, i] for i in range(self.num_cols)]
 
 def inferenceDense(phase,user_batch, item_batch,idx_user,idx_item, UReg=0.05, IReg=0.1):
     with tf.device(opt.DEVICE): 
@@ -161,8 +75,6 @@ def GraphRec(opt, train, test, USER_NUM, ITEM_NUM, ItemData=False,UserData=False
     for index, row in train.iterrows():
         userid=int(row['user'])
         itemid=int(row['item'])
-        print(f"{userid} , {itemid}")
-        
         AdjacencyUsers[userid][itemid]=row['rate']/5.0
         AdjacencyItems[itemid][userid]=row['rate']/5.0
         DegreeUsers[userid][0]+=1
@@ -311,6 +223,7 @@ def GraphRec(opt, train, test, USER_NUM, ITEM_NUM, ItemData=False,UserData=False
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--TRAIN_PATH', default="./kdeepfashion/rate_data.csv", help="train dataset path")
     parser.add_argument('--EPOCH_MAX', type=int, default=600)
     parser.add_argument('--BATCH_SIZE', type=int, default=1000, help='total batch size for all GPUs')
     parser.add_argument('--DEVICE', default="/gpu:0", help="/gpu:0")
@@ -327,7 +240,7 @@ if __name__ == '__main__':
 
     ############# ML 100k dataset ###########
 
-    df_train, df_test = get_data(opt)
+    df_train, df_test = get_data_tr(opt)
     
     USER_NUM = df_train.append(df_test)["user"].nunique()
     ITEM_NUM = df_train.append(df_test)["item"].nunique()
