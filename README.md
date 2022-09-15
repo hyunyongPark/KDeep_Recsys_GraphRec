@@ -99,9 +99,9 @@ python3 GraphRec-kfashion_Inference.py --RUN test
 
 |Embedding|Dataset|RMSE-Score|
 |---|---|---|
-|Graph|train(9373)/test(1042)|*0.9711*|
-|Graph + User + Item|train(9373)/test(1042)|*0.8357*|
-|Graph + User + Item|train(22639)/test(2516)|**0.7813**|
+|Graph|train(9,373)/valid(1,042)|*0.9711*|
+|Graph + User + Item|train(9,373)/valid(1,042)|*0.8357*|
+|Graph + User + Item|train(20,123)/valid(2,516)|**0.7813**|
 
 <table>
     </thead>
