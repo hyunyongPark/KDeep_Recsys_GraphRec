@@ -1,4 +1,4 @@
-# kdeepfashion_RecSys
+# KDeepFashion Project - GraphRec
 
 ### Original git Repo
 - https://github.com/ahmedrashed-ml/GraphRec
